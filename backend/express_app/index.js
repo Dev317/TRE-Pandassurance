@@ -11,7 +11,9 @@ import institutionRoutes from "./routes/institutions.js";
 import validatorRoutes from "./routes/validators.js";
 import policyRoutes from "./routes/policies.js";
 import contractRoutes from "./routes/contracts.js";
-
+import claimRoutes from "./routes/claims.js";
+import eventRoutes from "./routes/events.js";
+import payoutRoutes from "./routes/payouts.js";
 
 const app = express();
 
@@ -25,6 +27,9 @@ app.use('/institution', institutionRoutes);
 app.use('/validator', validatorRoutes);
 app.use('/policy', policyRoutes);
 app.use('/contract', contractRoutes);
+app.use('/claim', claimRoutes);
+app.use('/event', eventRoutes);
+app.use('/payout', payoutRoutes);
 
 
 const CONNECTION_URL = process.env.CONNECTION_URL;
