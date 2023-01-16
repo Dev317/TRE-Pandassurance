@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
 const validatorSchema = new mongoose.Schema({
     user: {
@@ -20,4 +20,5 @@ const validatorSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Validator', validatorSchema)
+const Validator = mongoose.model('Validator', validatorSchema);
+export default Validator;

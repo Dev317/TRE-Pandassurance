@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
 const claimSchema = new mongoose.Schema({
     contract: {
@@ -31,4 +31,5 @@ const claimSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Claim', claimSchema)
+const Claim = mongoose.model('Claim', claimSchema);
+export default Claim;

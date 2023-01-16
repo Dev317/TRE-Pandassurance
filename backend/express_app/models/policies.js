@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
 const policySchema = new mongoose.Schema({
     provider: {
@@ -48,4 +48,5 @@ const policySchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Policy', policySchema)
+const Policy = mongoose.model('Policy', policySchema);
+export default Policy;

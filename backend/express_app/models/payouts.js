@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
 const payoutSchema = new mongoose.Schema({
     claim: {
@@ -17,4 +17,5 @@ const payoutSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Payout', payoutSchema)
+const Payment = mongoose.model('Payout', payoutSchema);
+export default Payment;

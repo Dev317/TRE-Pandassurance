@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
 const contractSchema = new mongoose.Schema({
     policy: {
@@ -23,4 +23,5 @@ const contractSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Contract', contractSchema)
+const Contract = mongoose.model('Contract', contractSchema);
+export default Contract;
