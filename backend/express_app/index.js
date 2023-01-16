@@ -7,7 +7,10 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import userRoutes from "./routes/users.js";
-
+import institutionRoutes from "./routes/institutions.js";
+import validatorRoutes from "./routes/validators.js";
+import policyRoutes from "./routes/policies.js";
+import contractRoutes from "./routes/contracts.js";
 
 
 const app = express();
@@ -18,6 +21,10 @@ app.use(cors());
 
 // Routing
 app.use('/user', userRoutes);
+app.use('/institution', institutionRoutes);
+app.use('/validator', validatorRoutes);
+app.use('/policy', policyRoutes);
+app.use('/contract', contractRoutes);
 
 
 const CONNECTION_URL = process.env.CONNECTION_URL;

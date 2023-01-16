@@ -7,7 +7,7 @@ const contractSchema = new mongoose.Schema({
         required: true
     },
     user: {
-        type: mongoose.mongo.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
@@ -18,7 +18,6 @@ const contractSchema = new mongoose.Schema({
     },
     dateStart: {
         type: Date,
-        required: true,
         default: Date.now
     }
 })
