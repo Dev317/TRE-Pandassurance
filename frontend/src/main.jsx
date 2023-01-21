@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './index.css';
-import { createBrowserRouter, RouterProvider, Route, Link } from 'react-router-dom';
+import './assets/index.css';
+import { createBrowserRouter, RouterProvider, Route, Link, BrowserRouter } from 'react-router-dom';
 import ShopHome from './platforms/shop/pages/Home/ShopHome';
 import ValidatorHome from './platforms/validator/pages/Home/ValidatorHome';
 import CraftHome from './platforms/craft/pages/Home/CraftHome';
@@ -29,4 +29,9 @@ const router = createBrowserRouter([
 	},
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(<RouterProvider router={router} />);
+ReactDOM.createRoot(document.getElementById('root')).render(
+	<BrowserRouter>
+		{/* <RouterProvider router={router} /> */}
+		<CraftHome />
+	</BrowserRouter>
+);

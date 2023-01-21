@@ -1,4 +1,4 @@
-import './App.css';
+import './assets/App.css';
 
 // Here we will have all the options to swap between the platforms
 function App() {
