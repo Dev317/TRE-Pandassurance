@@ -10,8 +10,8 @@ import {
 	BrowserRouter,
 	Navigate,
 } from 'react-router-dom';
-import ShopHome from './platforms/shop/pages/Home/ShopHome';
-import ValidatorHome from './platforms/validator/pages/Home/ValidatorHome';
+import ShopHome from './platforms/shop/pages/ShopHome';
+import ValidatorHome from './platforms/validator/pages/ValidatorHome';
 import CraftHome from './platforms/craft/pages/CraftHome';
 import CraftDashboard from './platforms/craft/pages/CraftDashboard';
 import CraftPolicyManagement from './platforms/craft/pages/CraftPolicyManagement';
