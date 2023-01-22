@@ -1,5 +1,6 @@
 import { Button, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import '@fontsource/raleway';
 
 import './assets/App.css';
 

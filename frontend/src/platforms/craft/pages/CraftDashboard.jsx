@@ -14,6 +14,7 @@ const columns = [
 		title: 'Serial-code',
 		dataIndex: 'serialcode',
 		key: 'serialcode',
+		sorter: (a, b) => a.id - b.id,
 	},
 	{
 		title: 'Policy',
@@ -66,6 +67,7 @@ const columns = [
 ];
 const data = [
 	{
+		key: 1,
 		id: 1,
 		serialcode: '#MED456ABC',
 		policy: 'PandaCritical',
@@ -74,6 +76,7 @@ const data = [
 		insurer: 'John Smith',
 	},
 	{
+		key: 2,
 		id: 2,
 		serialcode: '#VEH324ZCP',
 		policy: 'PandaCarProtect',

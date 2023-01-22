@@ -1,7 +1,14 @@
 import React from 'react';
+import { Typography } from 'antd';
+
+const { Title } = Typography;
 
 function CraftDocuments() {
-	return <div>CraftDocuments</div>;
+	return (
+		<>
+			<Title>Documents</Title>
+		</>
+	);
 }
 
 export default CraftDocuments;

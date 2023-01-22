@@ -8,6 +8,7 @@ import CraftDashboard from './platforms/craft/pages/CraftDashboard';
 import CraftPolicyManagement from './platforms/craft/pages/CraftPolicyManagement';
 import CraftDocuments from './platforms/craft/pages/CraftDocuments';
 import CraftSettings from './platforms/craft/pages/CraftSettings';
+import CraftLogin from './platforms/craft/pages/CraftLogin';
 
 export const router = createBrowserRouter([
 	{
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
 				),
 			},
 		],
+	},
+	{
+		path: '/craft/login',
+		element: <CraftLogin />,
 	},
 	{
 		path: '/validator',

@@ -6,13 +6,9 @@ import {
 	SettingOutlined,
 } from '@ant-design/icons';
 import { useState } from 'react';
-import { Layout, Space, Menu, theme, Breadcrumb } from 'antd';
-import { Route, Routes, useNavigate, Outlet } from 'react-router-dom';
+import { Layout, Space, Menu } from 'antd';
+import { useNavigate, Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import Dashboard from './CraftDashboard';
-import PolicyManagement from './CraftPolicyManagement';
-import Documents from './CraftDocuments';
-import Settings from './CraftSettings';
 const { Header, Footer, Sider, Content } = Layout;
 
 const items = [
@@ -20,14 +16,12 @@ const items = [
 	{ label: 'Policy management', key: '/craft/policymanagement', icon: <DesktopOutlined /> },
 	{ label: 'Documents', key: '/craft/documents', icon: <FileOutlined /> },
 	{ label: 'Settings', key: '/craft/settings', icon: <SettingOutlined /> },
-	{ label: 'Signout', key: '/craft/login', icon: <PoweroffOutlined />, danger: true },
+	{ label: 'Logout', key: '/craft/login', icon: <PoweroffOutlined />, danger: true },
 ];
 
 const CraftHome = () => {
 	const [collapsed, setCollapsed] = useState(false);
-	const {
-		token: { colorBgContainer },
-	} = theme.useToken();
+
 	const navigate = useNavigate();
 	return (
 		<Space
@@ -47,6 +41,8 @@ const CraftHome = () => {
 					collapsible
 					collapsed={collapsed}
 					onCollapse={(value) => setCollapsed(value)}
+					breakpoint={'lg'}
+					collapsedWidth={0}
 				>
 					<div
 						style={{
@@ -62,7 +58,6 @@ const CraftHome = () => {
 						items={items}
 						onClick={({ key }) => {
 							navigate(key);
-							console.log(key);
 						}}
 					/>
 				</Sider>

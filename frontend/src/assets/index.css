@@ -1,5 +1,5 @@
 :root {
-	font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+	font-family: 'Raleway', Inter, Avenir, Helvetica, Arial, sans-serif;
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -7,6 +7,9 @@
 	-webkit-text-size-adjust: 100%;
 }
 
+html,
 body {
 	margin: 0;
+	overflow: hidden;
+	font-family: 'Raleway', Inter, Avenir, Helvetica, Arial, sans-serif;
 }
