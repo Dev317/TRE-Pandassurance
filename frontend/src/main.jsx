@@ -2,10 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './assets/index.css';
-import { createBrowserRouter, RouterProvider, Route, Link, BrowserRouter } from 'react-router-dom';
+import {
+	createBrowserRouter,
+	RouterProvider,
+	Route,
+	Link,
+	BrowserRouter,
+	Navigate,
+} from 'react-router-dom';
 import ShopHome from './platforms/shop/pages/Home/ShopHome';
 import ValidatorHome from './platforms/validator/pages/Home/ValidatorHome';
-import CraftHome from './platforms/craft/pages/Home/CraftHome';
+import CraftHome from './platforms/craft/pages/CraftHome';
+import CraftDashboard from './platforms/craft/pages/CraftDashboard';
+import CraftPolicyManagement from './platforms/craft/pages/CraftPolicyManagement';
+import CraftDocuments from './platforms/craft/pages/CraftDocuments';
+import CraftSettings from './platforms/craft/pages/CraftSettings';
 
 const router = createBrowserRouter([
 	{
@@ -20,7 +31,21 @@ const router = createBrowserRouter([
 	{
 		path: '/craft',
 		element: <CraftHome />,
-		children: [{ path: '', element: '' }],
+		children: [
+			{ path: 'dashboard', element: <CraftDashboard /> },
+			{ path: 'policymanagement', element: <CraftPolicyManagement /> },
+			{ path: 'documents', element: <CraftDocuments /> },
+			{ path: 'settings', element: <CraftSettings /> },
+			{
+				path: '',
+				element: (
+					<Navigate
+						to="dashboard"
+						replace
+					/>
+				),
+			},
+		],
 	},
 	{
 		path: '/validator',
@@ -29,9 +54,4 @@ const router = createBrowserRouter([
 	},
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-	<BrowserRouter>
-		{/* <RouterProvider router={router} /> */}
-		<CraftHome />
-	</BrowserRouter>
-);
+ReactDOM.createRoot(document.getElementById('root')).render(<RouterProvider router={router} />);
