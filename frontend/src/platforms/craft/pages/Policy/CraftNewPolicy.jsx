@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { Typography, Space, Button, message, Steps, theme } from 'antd';
 import CraftNewPolicyDescriptive from './CraftNewPolicyDescriptive';
+import CraftNewPolicyTerm from './CraftNewPolicyTerm';
+import CraftNewPolicyVerifier from './CraftNewPolicyVerifier';
 
 const { Title } = Typography;
 
 const steps = [
 	{
-		title: 'First',
+		title: 'Description',
 		content: <CraftNewPolicyDescriptive />,
 	},
 	{
-		title: 'Second',
-		content: 'Second-content',
+		title: 'Terms',
+		content: <CraftNewPolicyTerm />,
 	},
 	{
-		title: 'Last',
-		content: 'Last-content',
+		title: 'Verifiers',
+		content: <CraftNewPolicyVerifier />,
 	},
 ];
 
@@ -33,13 +35,13 @@ function CraftNewPolicy() {
 		title: item.title,
 	}));
 	const contentStyle = {
-		//lineHeight: '260px',
-		textAlign: 'center',
 		color: token.colorTextTertiary,
 		backgroundColor: token.colorFillAlter,
 		borderRadius: token.borderRadiusLG,
 		border: `1px dashed ${token.colorBorder}`,
 		marginTop: 16,
+		height: '50vh',
+		padding: 10,
 	};
 	return (
 		<>

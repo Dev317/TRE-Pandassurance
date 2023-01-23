@@ -10,6 +10,6 @@
 html,
 body {
 	margin: 0;
-	overflow: hidden;
+	overflow: auto;
 	font-family: 'Raleway', Inter, Avenir, Helvetica, Arial, sans-serif;
 }
