@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography, Space, Table, Tag } from 'antd';
+import { Typography, Space, Table, Tag, Button, Row, Col } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const { Title } = Typography;
 
@@ -81,9 +82,32 @@ const data = [
 ];
 
 function CraftPolicyManagement() {
+	let navigate = useNavigate();
+	const createNewPolicy = () => {
+		navigate('/craft/newpolicy');
+	};
 	return (
 		<>
-			<Title>Policy Management</Title>
+			<Row style={{ width: '100%', alignItems: 'baseline' }}>
+				<Col
+					span={12}
+					align="left"
+				>
+					<Title>Policy Management</Title>
+				</Col>
+				<Col
+					span={12}
+					align="right"
+				>
+					<Button
+						type="primary"
+						onClick={createNewPolicy}
+					>
+						Create new policy
+					</Button>
+				</Col>
+			</Row>
+
 			<Table
 				columns={columns}
 				dataSource={data}

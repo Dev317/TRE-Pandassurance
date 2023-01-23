@@ -9,6 +9,7 @@ import CraftPolicyManagement from './platforms/craft/pages/CraftPolicyManagement
 import CraftDocuments from './platforms/craft/pages/CraftDocuments';
 import CraftSettings from './platforms/craft/pages/CraftSettings';
 import CraftLogin from './platforms/craft/pages/CraftLogin';
+import CraftNewPolicy from './platforms/craft/pages/Policy/CraftNewPolicy';
 
 export const router = createBrowserRouter([
 	{
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
 			{ path: 'policymanagement', element: <CraftPolicyManagement /> },
 			{ path: 'documents', element: <CraftDocuments /> },
 			{ path: 'settings', element: <CraftSettings /> },
+			{ path: 'newpolicy', element: <CraftNewPolicy /> },
 			{
 				path: '',
 				element: (
