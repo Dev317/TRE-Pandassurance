@@ -1,10 +1,11 @@
 import express from 'express';
 
-import { createPayout } from '../controllers/payouts.js';
+import { createPayout, getPayoutsByContractId } from '../controllers/payouts.js';
 
 const router = express.Router();
 
 router.post('/create', createPayout);
+router.get('/:contractId', getPayoutsByContractId);
 
 
 export default router;

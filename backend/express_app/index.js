@@ -14,6 +14,7 @@ import contractRoutes from "./routes/contracts.js";
 import claimRoutes from "./routes/claims.js";
 import eventRoutes from "./routes/events.js";
 import payoutRoutes from "./routes/payouts.js";
+import paymentRoutes from "./routes/payments.js";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use('/contract', contractRoutes);
 app.use('/claim', claimRoutes);
 app.use('/event', eventRoutes);
 app.use('/payout', payoutRoutes);
+app.use('/payment', paymentRoutes);
 
 
 const CONNECTION_URL = process.env.CONNECTION_URL;

@@ -22,6 +22,17 @@ export const createContract = async (req, res) => {
     }
 }
 
+export const getContracts = async (req, res) => {
+    try {
+        const contractList = await Contract.find();
+        res.status(200).json(contractList);
+    } catch (err) {
+        res.status(404).json({
+            message: err.message,
+        })
+    }
+}
+
 export const readContract = async (req, res) => {
     const { id: _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that ID!');
@@ -34,5 +45,19 @@ export const readContract = async (req, res) => {
             message: "Contract not found!"
         })
     }
+}
 
+export const updateContract = async (req, res) => {
+    const { id: _id } = req.params;
+    let updatedContract = req.body;
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No contract with that ID!');
+    updatedContract = await Contract.findByIdAndUpdate(_id, { ...updatedContract, _id }, { new: true} );
+    res.json(updatedContract);
+}
+
+export const deleteContract = async (req, res) => {
+    const { id: _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No contract with that ID!');
+    await Contract.findByIdAndRemove(_id);
+    res.json({ message: 'Contract deleted!' });
 }

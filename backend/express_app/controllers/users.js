@@ -14,3 +14,37 @@ export const createUser = async (req, res) => {
     }
 }
 
+export const getUsers = async (req, res) => {
+    try {
+        const userList = await User.find();
+        res.status(200).json(userList);
+    } catch (err) {
+        res.status(404).json({
+            message: err.message,
+        })
+    }
+}
+
+export const getUserById = async (req, res) => {
+    const { id: _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No user with that ID!');
+    const foundUser = await User.findById(_id);
+    res.json(foundUser);
+}
+
+export const updateUser = async (req, res) => {
+    const { id: _id } = req.params;
+    let updatedUser = req.body;
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No user with that ID!');
+
+    updatedUser = await User.findByIdAndUpdate(_id, { ...updatedUser, _id }, { new: true} );
+
+    res.json(updatedUser);
+}
+
+export const deleteUser = async (req, res) => {
+    const { id: _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that ID!');
+    await User.findByIdAndRemove(_id);
+    res.json({ message: 'User deleted!' });
+}
