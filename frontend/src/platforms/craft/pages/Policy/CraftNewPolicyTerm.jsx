@@ -1,46 +1,50 @@
-import { Form, Input, Radio, InputNumber } from 'antd';
-import React from 'react';
+import { Form, Input, Radio, InputNumber, Typography } from 'antd';
+import React, { useState } from 'react';
+
+const { Text, Title } = Typography;
+
+// 2. Term (Cover X Years (Term)/ Wholelife)
+// 2.a If Term = Term, enter years.
+// 2.b if Term = WholeLife years = 999
 
 function CraftNewPolicyTerm() {
+	const [value, setValue] = useState(1);
+	const onChange = (e) => {
+		setValue(e.target.value);
+		if (value === 1) {
+			console.log('yes');
+		} else {
+			console.log('no');
+		}
+	};
 	return (
 		<>
 			<Form layout="vertical">
 				<Form.Item label="Term">
-					{/* What should it return as ? Is it a number or a sentence*/}
-					<Input placeholder="Enter the term of the policy" />
+					<Text code>Term = Cover X (Years (Term) / whole life)</Text>
 				</Form.Item>
-				<Form.Item label="Premium amount">
-					{/* What should it return as ? */}
-					<InputNumber
-						defaultValue="1"
-						min="0"
-						step="0.0001"
-						stringMode
-						style={{ width: '100%' }}
-						placeholder="Enter the amount of premium of the policy"
-					/>
-				</Form.Item>
-				<Form.Item label="Premium frequency">
+				<Form.Item label="Is this a whole life plan?">
 					<Radio.Group
-						defaultValue="monthly"
-						size="large"
+						onChange={onChange}
+						value={value}
 					>
-						<Radio.Button value="monthly">Monthly</Radio.Button>
-						<Radio.Button value="quarterly">Quarterly</Radio.Button>
-						<Radio.Button value="semiannually">Semi-annually</Radio.Button>
-						<Radio.Button value="yearly">Yearly</Radio.Button>
+						<Radio value={1}>Yes</Radio>
+						<Radio value={2}>No</Radio>
 					</Radio.Group>
 				</Form.Item>
-				<Form.Item label="Policy payout">
-					{/* What should it return as ? */}
-					<InputNumber
-						defaultValue="1"
-						min="0"
-						step="0.0001"
-						stringMode
-						style={{ width: '100%' }}
-						placeholder="Enter a payout amount"
-					/>
+				<Form.Item label="Enter the term of the policy">
+					{value === 1 ? (
+						<Input
+							placeholder="999"
+							disabled
+						/>
+					) : (
+						<InputNumber
+							defaultValue="1"
+							stringMode
+							style={{ width: '100%' }}
+						/>
+					)}
 				</Form.Item>
 			</Form>
 		</>

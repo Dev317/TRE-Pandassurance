@@ -1,110 +1,145 @@
-import { Col, Row, Space, Table, Typography } from 'antd';
-import React from 'react';
+import {
+	Col,
+	Row,
+	Space,
+	Table,
+	InputNumber,
+	Typography,
+	Form,
+	Select,
+	notification,
+	Popconfirm,
+} from 'antd';
+import React, { useState } from 'react';
 
 const { Title } = Typography;
 
-const validators = [
+// 5. Data Validators (Enter Validator Public Key/ User ID)
+// 6. Multi Sig Settings (Enter Number of validators required for Multi-Sig)
+
+const options = [
 	{
-		name: 'Dr Robert Evans',
-		organisation: 'RPPH',
+		value: '12345678',
+		label: 'Jack Smith from RRPH',
 	},
 	{
-		name: 'Dr Emily Lai',
-		organisation: 'RPPH',
+		value: '11223344',
+		label: 'Lucy Miles from PCH',
 	},
 	{
-		name: 'Dr Michelle Anna',
-		organisation: 'RPPH',
-	},
-	{
-		name: 'Dr John Smith',
-		organisation: 'PCH',
+		value: '22334455',
+		label: 'Tom Jackson from RRPH',
 	},
 ];
 
-const addedValidators = [];
-
-const columns = [
-	{
-		title: 'Organisation',
-		dataIndex: 'organisation',
-		key: 'organisation',
-		sorter: (a, b) => a.organisation.localeCompare(b.organisation),
-	},
-	{
-		title: 'Name',
-		dataIndex: 'name',
-		key: 'name',
-		sorter: (a, b) => a.name.localeCompare(b.name),
-	},
-	{
-		title: 'Action',
-		key: 'action',
-		render: (_, record) => (
-			<Space size="middle">
-				<a>View</a>
-				<a>Add</a>
-			</Space>
-		),
-	},
-];
-
-const addedColumns = [
-	{
-		title: 'Organisation',
-		dataIndex: 'organisation',
-		key: 'organisation',
-		sorter: (a, b) => a.organisation.localeCompare(b.organisation),
-	},
-	{
-		title: 'Name',
-		dataIndex: 'name',
-		key: 'name',
-		sorter: (a, b) => a.name.localeCompare(b.name),
-	},
-	{
-		title: 'Action',
-		key: 'action',
-		render: (_, record) => (
-			<Space size="middle">
-				<a>View</a>
-				<a>Delete</a>
-			</Space>
-		),
-	},
-];
+const onChange = (value) => {
+	console.log(`selected ${value}`);
+};
+const onSearch = (value) => {
+	console.log('search:', value);
+};
+const openNotification = () => {
+	notification.open({
+		message: 'Maximum verifiers added based on signatures',
+	});
+};
 
 function CraftNewPolicyVerifier() {
+	const startData = [];
+	const [addedVerifier, setAddedVerifier] = useState(startData);
+	const [countOfSignatures, setCountOfSignatures] = useState(1);
+	const [count, setCount] = useState(0);
+
+	const handleDelete = (key) => {
+		const newData = addedVerifier.filter((item) => item.key !== key);
+		setAddedVerifier(newData);
+	};
+
+	const addedColumns = [
+		{
+			title: 'Organisation',
+			dataIndex: 'organisation',
+			key: 'organisation',
+			sorter: (a, b) => a.organisation.localeCompare(b.organisation),
+		},
+		{
+			title: 'Name',
+			dataIndex: 'name',
+			key: 'name',
+			sorter: (a, b) => a.name.localeCompare(b.name),
+		},
+		{
+			title: 'Action',
+			key: 'action',
+			render: (_, record) => (
+				<Space size="middle">
+					<Popconfirm
+						title="Sure to delete?"
+						onConfirm={() => handleDelete(record.key)}
+					>
+						<a>Delete</a>
+					</Popconfirm>
+				</Space>
+			),
+		},
+	];
+
+	const onInputNumber = (value) => {
+		setCountOfSignatures(value);
+	};
+	const [api, contextHolder] = notification.useNotification();
+	const openNotification = () => {
+		api['error']({
+			message: 'Maximum number of required signatures',
+		});
+	};
+
+	const onSourceChange = (value, option) => {
+		if (addedVerifier.length === countOfSignatures) {
+			openNotification();
+			return;
+		}
+		let info = option?.label.split(' from ');
+		let newData = [...addedVerifier];
+		newData.push({ key: count, organisation: info[1], name: info[0] });
+		setAddedVerifier(newData);
+		setCount(count + 1);
+	};
 	return (
 		<>
-			<Row gutter={[10]}>
-				<Col
-					xs={24}
-					sm={12}
-					md={16}
-					lg={16}
-					xl={16}
-				>
-					<Title level={4}>Possible verifiers</Title>
-					<Table
-						columns={columns}
-						dataSource={validators}
+			{contextHolder}
+			<Form layout="vertical">
+				<Form.Item label="Number of validators required for Multi-signature">
+					<InputNumber
+						placeholder="Enter number"
+						min={1}
+						defaultValue={countOfSignatures}
+						onChange={onInputNumber}
 					/>
-				</Col>
-				<Col
-					xs={24}
-					sm={12}
-					md={8}
-					lg={8}
-					xl={8}
-				>
-					<Title level={4}>Added verifiers</Title>
+				</Form.Item>
+				<Form.Item label="Search verifiers">
+					<Select
+						showSearch
+						placeholder="Select a verifier"
+						optionFilterProp="children"
+						onChange={onChange}
+						onSearch={onSearch}
+						onSelect={onSourceChange}
+						filterOption={(input, option) =>
+							(option?.label ?? '').toLowerCase().includes(input.toLowerCase()) ||
+							(option?.value ?? '').toLowerCase().includes(input.toLowerCase())
+						}
+						options={options}
+					/>
+				</Form.Item>
+				<Form.Item label="Added verifiers">
 					<Table
 						columns={addedColumns}
-						dataSource={addedValidators}
+						dataSource={addedVerifier}
+						size="small"
 					/>
-				</Col>
-			</Row>
+				</Form.Item>
+			</Form>
 		</>
 	);
 }

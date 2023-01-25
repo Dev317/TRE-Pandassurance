@@ -4,6 +4,7 @@ import React from 'react';
 const { Title } = Typography;
 const { TextArea } = Input;
 
+// Select Coverage (Hospitalization, Death, Critical Illness, Disability Income, Personal Accident)
 function CraftNewPolicyDescriptive() {
 	return (
 		<>
@@ -13,27 +14,15 @@ function CraftNewPolicyDescriptive() {
 				</Form.Item>
 				<Form.Item label="Policy category">
 					<Radio.Group
-						defaultValue="medical"
+						defaultValue="hospitalisation"
 						size="large"
+						buttonStyle="solid"
 					>
-						<Radio.Button
-							value="medical"
-							style={{
-								backgroundColor: '#2DCE89',
-								color: 'white',
-							}}
-						>
-							Medical
-						</Radio.Button>
-						<Radio.Button
-							value="vehicular"
-							style={{
-								backgroundColor: '#11CDEF',
-								color: 'white',
-							}}
-						>
-							Vehicular
-						</Radio.Button>
+						<Radio.Button value="hospitalisation">Hospitalization</Radio.Button>
+						<Radio.Button value="death">Death</Radio.Button>
+						<Radio.Button value="criticalIllness">Critical Illness</Radio.Button>
+						<Radio.Button value="disabilityIncome">Disability Income</Radio.Button>
+						<Radio.Button value="personalAccident">Personal Accident</Radio.Button>
 					</Radio.Group>
 				</Form.Item>
 				<Form.Item label="Policy description">

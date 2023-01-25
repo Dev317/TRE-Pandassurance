@@ -3,6 +3,7 @@ import { Typography, Space, Button, message, Steps, theme } from 'antd';
 import CraftNewPolicyDescriptive from './CraftNewPolicyDescriptive';
 import CraftNewPolicyTerm from './CraftNewPolicyTerm';
 import CraftNewPolicyVerifier from './CraftNewPolicyVerifier';
+import CraftNewPolicyPremium from './CraftNewPolicyPremium';
 
 const { Title } = Typography;
 
@@ -14,6 +15,10 @@ const steps = [
 	{
 		title: 'Terms',
 		content: <CraftNewPolicyTerm />,
+	},
+	{
+		title: 'Premium',
+		content: <CraftNewPolicyPremium />,
 	},
 	{
 		title: 'Verifiers',
