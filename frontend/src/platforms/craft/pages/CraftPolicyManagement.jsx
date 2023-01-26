@@ -1,6 +1,8 @@
 import React from 'react';
 import { Typography, Space, Table, Tag, Button, Row, Col } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const { Title } = Typography;
 
@@ -62,7 +64,7 @@ const columns = [
 		),
 	},
 ];
-const data = [
+const defaultData = [
 	{
 		key: 1,
 		serialcode: '#MED456ABC',
@@ -82,10 +84,42 @@ const data = [
 ];
 
 function CraftPolicyManagement() {
+	const [data, setData] = useState(defaultData);
 	let navigate = useNavigate();
 	const createNewPolicy = () => {
 		navigate('/craft/newpolicy');
 	};
+	const { state } = useLocation();
+	useEffect(() => {
+		var currentdate = new Date();
+		if (state != null) {
+			const {
+				name,
+				category,
+				description,
+				term,
+				frequency,
+				amount,
+				no_of_validators,
+				validators,
+			} = state; // Read values passed on state
+			let temp = [...data];
+			temp.push({
+				key: data.length + 1,
+				serialcode: '#MED123ABC',
+				policy: name,
+				category: [category],
+				createdAt: `${currentdate.getDate()}/${
+					currentdate.getMonth() + 1
+				}/${currentdate.getFullYear()} ${currentdate.getHours()}:${currentdate.getMinutes()}`,
+				updatedAt: `${currentdate.getDate()}/${
+					currentdate.getMonth() + 1
+				}/${currentdate.getFullYear()} ${currentdate.getHours()}:${currentdate.getMinutes()}`,
+			});
+			setData(temp);
+			console.log(state);
+		}
+	}, []);
 	return (
 		<>
 			<Row style={{ width: '100%', alignItems: 'baseline' }}>

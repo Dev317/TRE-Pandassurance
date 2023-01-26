@@ -4,6 +4,7 @@ import CraftNewPolicyDescriptive from './CraftNewPolicyDescriptive';
 import CraftNewPolicyTerm from './CraftNewPolicyTerm';
 import CraftNewPolicyVerifier from './CraftNewPolicyVerifier';
 import CraftNewPolicyPremium from './CraftNewPolicyPremium';
+import { useNavigate } from 'react-router-dom';
 
 const { Title } = Typography;
 
@@ -48,6 +49,32 @@ function CraftNewPolicy() {
 		height: '50vh',
 		padding: 10,
 	};
+
+	const navigate = useNavigate();
+	const createNewPolicy = () => {
+		let name = localStorage.getItem('policy_name');
+		let category = localStorage.getItem('policy_category');
+		let description = localStorage.getItem('policy_description');
+		let term = localStorage.getItem('term');
+		let frequency = localStorage.getItem('premium_frequency');
+		let amount = localStorage.getItem('premium_amount');
+		let no_of_validators = localStorage.getItem('no_of_validators');
+		let validators = localStorage.getItem('validators');
+		message.success('Processing complete!');
+		navigate('/craft/policymanagement', {
+			state: {
+				name: name,
+				category: category,
+				description: description,
+				term: term,
+				frequency: frequency,
+				amount: amount,
+				no_of_validators: no_of_validators,
+				validators: validators,
+			},
+		});
+	};
+
 	return (
 		<>
 			<Title>Create new policy</Title>
@@ -73,7 +100,7 @@ function CraftNewPolicy() {
 				{current === steps.length - 1 && (
 					<Button
 						type="primary"
-						onClick={() => message.success('Processing complete!')}
+						onClick={() => createNewPolicy()}
 					>
 						Done
 					</Button>

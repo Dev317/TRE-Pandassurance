@@ -27,14 +27,14 @@ export const router = createBrowserRouter([
 		children: [
 			{ path: 'dashboard', element: <CraftDashboard /> },
 			{ path: 'policymanagement', element: <CraftPolicyManagement /> },
-			{ path: 'documents', element: <CraftDocuments /> },
-			{ path: 'settings', element: <CraftSettings /> },
+			// { path: 'documents', element: <CraftDocuments /> },
+			// { path: 'settings', element: <CraftSettings /> },
 			{ path: 'newpolicy', element: <CraftNewPolicy /> },
 			{
 				path: '',
 				element: (
 					<Navigate
-						to="dashboard"
+						to="/craft/login"
 						replace
 					/>
 				),

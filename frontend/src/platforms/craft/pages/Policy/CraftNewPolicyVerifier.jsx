@@ -32,9 +32,6 @@ const options = [
 	},
 ];
 
-const onChange = (value) => {
-	console.log(`selected ${value}`);
-};
 const onSearch = (value) => {
 	console.log('search:', value);
 };
@@ -49,6 +46,11 @@ function CraftNewPolicyVerifier() {
 	const [addedVerifier, setAddedVerifier] = useState(startData);
 	const [countOfSignatures, setCountOfSignatures] = useState(1);
 	const [count, setCount] = useState(0);
+
+	const onChange = (value) => {
+		console.log(`selected ${value}`);
+		localStorage.setItem('validators', JSON.stringify(addedVerifier));
+	};
 
 	const handleDelete = (key) => {
 		const newData = addedVerifier.filter((item) => item.key !== key);
@@ -105,19 +107,36 @@ function CraftNewPolicyVerifier() {
 		setAddedVerifier(newData);
 		setCount(count + 1);
 	};
+	const onFormChange = (values) => {
+		localStorage.setItem('no_of_validators', values[0]['value']);
+		localStorage.setItem('validators', JSON.stringify(addedVerifier));
+	};
 	return (
 		<>
 			{contextHolder}
-			<Form layout="vertical">
-				<Form.Item label="Number of validators required for Multi-signature">
+			<Form
+				layout="vertical"
+				initialValues={{
+					noOfValidators: countOfSignatures,
+				}}
+				onFieldsChange={(_, allFields) => {
+					onFormChange(allFields);
+				}}
+			>
+				<Form.Item
+					label="Number of validators required for Multi-signature"
+					name="noOfValidators"
+				>
 					<InputNumber
 						placeholder="Enter number"
 						min={1}
-						defaultValue={countOfSignatures}
 						onChange={onInputNumber}
 					/>
 				</Form.Item>
-				<Form.Item label="Search verifiers">
+				<Form.Item
+					label="Search verifiers"
+					name="search"
+				>
 					<Select
 						showSearch
 						placeholder="Select a verifier"

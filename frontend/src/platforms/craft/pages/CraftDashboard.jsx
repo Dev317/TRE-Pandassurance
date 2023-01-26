@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography, Space, Table, Tag } from 'antd';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const { Title } = Typography;
 
@@ -87,6 +89,26 @@ const data = [
 ];
 
 function CraftDashboard() {
+	// 63c56306a976bfba6a6ed61a
+
+	// const institutionAPI = 'https://tre-pandassurance-78ug.vercel.app/institution/';
+	// useEffect(() => {
+	// 	const data = JSON.parse(localStorage.getItem('craft-user'));
+	// 	axios
+	// 		.get(institutionAPI + data['_id'])
+	// 		.then(function (response) {
+	// 			// handle success
+	// 			console.log(response.data);
+	// 		})
+	// 		.catch(function (error) {
+	// 			// handle error
+	// 			console.log(error);
+	// 		})
+	// 		.then(function () {
+	// 			// always executed
+	// 		});
+	// });
+
 	return (
 		<>
 			<Title>Overview</Title>

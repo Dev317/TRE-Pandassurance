@@ -1,15 +1,66 @@
-import React from 'react';
-import { Form, Input, Button, Checkbox, Space, Typography } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Form, Input, Button, Checkbox, Space, Typography, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const { Title } = Typography;
 
 function CraftLogin() {
+	// const [api, contextHolder] = notification.useNotification();
+	// const openNotification = () => {
+	// 	api['error']({
+	// 		message: 'No such user or wrong password',
+	// 	});
+	// };
+
+	// const [isLoggedIn, setIsLoggedIn] = useState(false);
+	// const checkUserToken = () => {
+	// 	const userToken = localStorage.getItem('craft-user');
+	// 	if (!userToken || userToken === 'undefined') {
+	// 		setIsLoggedIn(false);
+	// 		return navigate('/craft/login');
+	// 	}
+	// 	setIsLoggedIn(true);
+	// 	navigate('/craft/dashboard');
+	// };
+
+	// useEffect(() => {
+	// 	checkUserToken();
+	// }, [isLoggedIn]);
+
+	// const navigate = useNavigate();
+	// const loginAPI = 'https://tre-pandassurance-78ug.vercel.app/institution/';
+	// const onFinish = (values) => {
+	// 	axios
+	// 		.get(loginAPI)
+	// 		.then(function (response) {
+	// 			// handle success
+	// 			let users = response.data;
+	// 			for (let i = 0; i < users.length; i++) {
+	// 				if (users[i].adminEmail === values.email) {
+	// 					setIsLoggedIn(true);
+	// 					localStorage.setItem('craft-user', JSON.stringify(users[i]));
+	// 					return navigate('/craft');
+	// 				}
+	// 			}
+
+	// 			openNotification();
+	// 		})
+	// 		.catch(function (error) {
+	// 			// handle error
+	// 			console.log(error);
+	// 		})
+	// 		.then(function () {
+	// 			// always executed
+	// 		});
+	// };
 	const navigate = useNavigate();
 	const onFinish = (values) => {
-		navigate('/craft');
+		console.log(values);
+		navigate('/craft/dashboard');
 	};
+
 	return (
 		<Space
 			align="center"
@@ -26,18 +77,18 @@ function CraftLogin() {
 				onFinish={onFinish}
 			>
 				<Form.Item
-					name="username"
-					rules={[{ required: true, message: 'Please input your username!' }]}
+					name="email"
+					rules={[{ required: true, message: 'Please input your email!' }]}
 				>
 					<Input
 						prefix={<UserOutlined />}
-						placeholder="Username"
+						placeholder="Email"
 						size="large"
 					/>
 				</Form.Item>
 				<Form.Item
 					name="password"
-					rules={[{ required: true, message: 'Please input your Password!' }]}
+					rules={[{ required: true, message: 'Please input your password!' }]}
 				>
 					<Input
 						prefix={<LockOutlined />}

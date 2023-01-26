@@ -7,22 +7,40 @@ const { Text, Title } = Typography;
 // Enter Premium Amount ($)
 
 function CraftNewPolicyPremium() {
+	const onFormChange = (values) => {
+		localStorage.setItem('premium_frequency', values[0]['value']);
+		localStorage.setItem('premium_amount', values[1]['value']);
+	};
 	return (
 		<>
-			<Form layout="vertical">
-				<Form.Item label="Premium frequency">
+			<Form
+				layout="vertical"
+				initialValues={{
+					premium_frequency: 'onetime',
+					premium_amount: 100,
+				}}
+				onFieldsChange={(_, allFields) => {
+					onFormChange(allFields);
+				}}
+			>
+				<Form.Item
+					label="Premium frequency"
+					name="premium_frequency"
+				>
 					<Radio.Group
-						defaultValue="onetime"
 						size="large"
+						buttonStyle="solid"
 					>
 						<Radio.Button value="onetime">One Time</Radio.Button>
 						<Radio.Button value="monthly">Monthly</Radio.Button>
 						<Radio.Button value="annually">Annually</Radio.Button>
 					</Radio.Group>
 				</Form.Item>
-				<Form.Item label="Premium amount">
+				<Form.Item
+					label="Premium amount"
+					name="premium_amount"
+				>
 					<InputNumber
-						defaultValue="100"
 						min="0"
 						step="0.0001"
 						stringMode

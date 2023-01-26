@@ -14,8 +14,8 @@ const { Header, Footer, Sider, Content } = Layout;
 const items = [
 	{ label: 'Dashboard', key: '/craft/dashboard', icon: <PieChartOutlined /> },
 	{ label: 'Policy management', key: '/craft/policymanagement', icon: <DesktopOutlined /> },
-	{ label: 'Documents', key: '/craft/documents', icon: <FileOutlined /> },
-	{ label: 'Settings', key: '/craft/settings', icon: <SettingOutlined /> },
+	// { label: 'Documents', key: '/craft/documents', icon: <FileOutlined /> },
+	// { label: 'Settings', key: '/craft/settings', icon: <SettingOutlined /> },
 	{ label: 'Logout', key: '/craft/login', icon: <PoweroffOutlined />, danger: true },
 ];
 

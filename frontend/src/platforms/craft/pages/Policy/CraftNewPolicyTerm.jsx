@@ -9,21 +9,43 @@ const { Text, Title } = Typography;
 
 function CraftNewPolicyTerm() {
 	const [value, setValue] = useState(1);
+	const [term, setTerm] = useState(999);
 	const onChange = (e) => {
 		setValue(e.target.value);
-		if (value === 1) {
-			console.log('yes');
+	};
+	const onFormChange = (values) => {
+		let isLifePlan = values[0]['value'];
+		if (isLifePlan === 1) {
+			setTerm(999);
+			localStorage.setItem('term', 999);
 		} else {
-			console.log('no');
+			if (values[1]['value'] == null) {
+				localStorage.setItem('term', 1);
+			} else {
+				console.log(values[1]['value']);
+				localStorage.setItem('term', values[1]['value']);
+			}
 		}
 	};
 	return (
 		<>
-			<Form layout="vertical">
+			<Form
+				layout="vertical"
+				initialValues={{
+					termDefault: 1,
+					isLifePlan: 1,
+				}}
+				onFieldsChange={(_, allFields) => {
+					onFormChange(allFields);
+				}}
+			>
 				<Form.Item label="Term">
 					<Text code>Term = Cover X (Years (Term) / whole life)</Text>
 				</Form.Item>
-				<Form.Item label="Is this a whole life plan?">
+				<Form.Item
+					label="Is this a whole life plan?"
+					name="isLifePlan"
+				>
 					<Radio.Group
 						onChange={onChange}
 						value={value}
@@ -32,7 +54,10 @@ function CraftNewPolicyTerm() {
 						<Radio value={2}>No</Radio>
 					</Radio.Group>
 				</Form.Item>
-				<Form.Item label="Enter the term of the policy">
+				<Form.Item
+					label="Enter the term of the policy"
+					name="term"
+				>
 					{value === 1 ? (
 						<Input
 							placeholder="999"
@@ -40,7 +65,6 @@ function CraftNewPolicyTerm() {
 						/>
 					) : (
 						<InputNumber
-							defaultValue="1"
 							stringMode
 							style={{ width: '100%' }}
 						/>
