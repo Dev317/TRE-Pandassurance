@@ -12,7 +12,6 @@ const payoutSchema = new mongoose.Schema({
     },
     isVerified: {
         type: Boolean,
-        required: true,
         default: false
     }
 })

@@ -13,7 +13,6 @@ const contractSchema = new mongoose.Schema({
     },
     validity: {
         type: Boolean,
-        required: true,
         default: false
     },
     dateStart: {

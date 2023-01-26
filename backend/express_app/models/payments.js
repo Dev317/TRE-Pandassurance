@@ -1,11 +1,6 @@
 import mongoose from 'mongoose';
 
 const paymentSchema = new mongoose.Schema({
-    client: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
     contract: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Contract',
@@ -17,13 +12,11 @@ const paymentSchema = new mongoose.Schema({
     },
     timestamp: {
         type: Date,
-        required: true,
         default: Date.now
     },
     isVerified: {
         type: Boolean,
-        required: true,
-        default: false
+        default: true
     }
 })
 
